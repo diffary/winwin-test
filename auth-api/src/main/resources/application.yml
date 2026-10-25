@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: ${POSTGRES_URL}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  sql:
+    init:
+      mode: always          # run schema.sql on startup (CREATE TABLE IF NOT EXISTS, so idempotent)
+  jpa:
+    hibernate:
+      ddl-auto: validate    # schema is owned by schema.sql; Hibernate only checks it matches
+    open-in-view: false
+
+app:
+  jwt-secret: ${JWT_SECRET}
+  jwt-ttl-seconds: 3600
+  internal-token: ${INTERNAL_TOKEN}
+  data-api-url: ${DATA_API_URL:http://data-api:8081}
